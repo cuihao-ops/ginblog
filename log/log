@@ -1,0 +1,10 @@
+time="2021-04-09T11:38:36+08:00" level=warning Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0" DataSize=0 HostName=YH-202010251934 Ip=127.0.0.1 Method=GET Path=/me SpendTime="1 ms" status=404
+time="2021-04-09T11:38:36+08:00" level=warning Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0" DataSize=0 HostName=YH-202010251934 Ip=127.0.0.1 Method=GET Path=/favicon.ico SpendTime="0 ms" status=404
+time="2021-04-09T11:38:42+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0" DataSize=1525 HostName=YH-202010251934 Ip=127.0.0.1 Method=GET Path=/metrics SpendTime="1 ms" status=200
+time="2021-04-09T11:39:07+08:00" level=info Agent="ApiPOST Runtime +https://www.apipost.cn" DataSize=377 HostName=YH-202010251934 Ip=127.0.0.1 Method=GET Path="/api/v1/users?pagesize=&pagenum=" SpendTime="163 ms" status=200
+time="2021-04-09T11:39:09+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0" DataSize=1611 HostName=YH-202010251934 Ip=127.0.0.1 Method=GET Path=/metrics SpendTime="2 ms" status=200
+ethod=POST Path=/api/v1/user/add SpendTime="31 ms" status=200
+time="2021-03-03T16:50:27+08:00" level=info Agent="ApiPOST Runtime +https://www.apipost.cn" DataSize=67 HostName=YH-202010251934 Ip=127.0.0.1 Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
+time="2021-03-03T16:50:34+08:00" level=info Agent="ApiPOST Runtime +https://www.apipost.cn" DataSize=64 HostName=YH-202010251934 Ip=127.0.0.1 Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
+time="2021-03-03T16:50:44+08:00" level=info Agent="ApiPOST Runtime +https://www.apipost.cn" DataSize=58 HostName=YH-202010251934 Ip=127.0.0.1 Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
+time="2021-03-03T16:51:17+08:00" level=info Agent="ApiPOST Runtime +https://www.apipost.cn" DataSize=217 HostName=YH-202010251934 Ip=127.0.0.1 Method=POST Path=/api/v1/user/add SpendTime="186 ms" status=200
