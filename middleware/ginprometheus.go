@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"ginblog/utils"
 	"strconv"
 	"sync"
 	"time"
@@ -14,21 +15,31 @@ const (
 	faviconPath = "/favicon.ico"
 )
 
+var application = "application"
+
 var (
 	// httpHistogram prometheus 模型
 	httpHistogram = prometheus.NewHistogramVec(prometheus.HistogramOpts{
 		Namespace:   "http_server",
 		Subsystem:   "",
-		Name:        "requests_seconds",
+		Name:        "histogram",
 		Help:        "Histogram of response latency (seconds) of http handlers.",
 		ConstLabels: nil,
 		Buckets:     nil,
-	}, []string{"method", "code", "uri"})
+	}, []string{"method", "code", "uri", application})
+
+	httpCounter = prometheus.NewCounterVec(prometheus.CounterOpts{
+		Namespace:   "http_server",
+		Subsystem:   "",
+		Name:        "counter",
+		Help:        "counter of response latency (seconds) of http handlers.",
+		ConstLabels: nil,
+	}, []string{"method", "code", "uri", application})
 )
 
 // init 初始化prometheus模型
 func init() {
-	prometheus.MustRegister(httpHistogram)
+	prometheus.MustRegister(httpHistogram, httpCounter)
 }
 
 // handlerPath 定义采样路由struct
@@ -52,10 +63,11 @@ func (hp *handlerPath) set(ri gin.RouteInfo) {
 
 // GinPrometheus gin调用Prometheus的struct
 type GinPrometheus struct {
-	engine  *gin.Engine
-	ignored map[string]bool
-	pathMap *handlerPath
-	updated bool
+	engine      *gin.Engine
+	ignored     map[string]bool
+	pathMap     *handlerPath
+	updated     bool
+	application string
 }
 
 type Option func(*GinPrometheus)
@@ -81,7 +93,8 @@ func New(e *gin.Engine, options ...Option) *GinPrometheus {
 			metricsPath: true,
 			faviconPath: true,
 		},
-		pathMap: &handlerPath{},
+		pathMap:     &handlerPath{},
+		application: utils.AppName,
 	}
 
 	for _, o := range options {
@@ -117,6 +130,14 @@ func (gp *GinPrometheus) Middleware() gin.HandlerFunc {
 			c.Request.Method,
 			strconv.Itoa(c.Writer.Status()),
 			gp.pathMap.get(c.HandlerName()),
+			gp.application,
 		).Observe(time.Since(start).Seconds())
+
+		httpCounter.WithLabelValues(
+			c.Request.Method,
+			strconv.Itoa(c.Writer.Status()),
+			gp.application,
+			gp.pathMap.get(c.HandlerName()),
+		).Inc()
 	}
 }

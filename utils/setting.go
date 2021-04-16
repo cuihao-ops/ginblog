@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	AppName  string
 	AppMode  string
 	HttpPort string
 	JwtKey   string
@@ -35,6 +36,7 @@ func init() {
 }
 
 func LoanServer(file *ini.File) {
+	AppName = file.Section("server").Key("AppName").MustString("ginblog")
 	AppMode = file.Section("server").Key("AppMode").MustString("debug")
 	HttpPort = file.Section("server").Key("HttpPort").MustString(":3000")
 	JwtKey = file.Section("server").Key("JwtKey").MustString("sss999wefaf")
